@@ -3,6 +3,7 @@
 
 
   <node pkg="txt_pub" type="txt_pub" name="txt_pub"  output="screen">
+        <param name="rev_point" value="true"/>
   	<param name="pathdir" value="/home/sundong/bit_ivrc/other/txt_pub/data/txt/temp_seg/10000.txt"/>
   </node>
 

@@ -6,13 +6,15 @@
 #include <fstream>
 
 Txt_pub::Txt_pub(ros::NodeHandle &nh) {
-    ros::param::get("~pathdir", path_dir);
+    flag_rev_point = false;
     flag_read_finish = false;
+    ros::param::get("~pathdir", path_dir);
+    ros::param::get("~rev_point",flag_rev_point);
     pub = nh.advertise<sensor_driver_msgs::GpswithHeading>("/gpsdata", 50);
-    Read_txt(path_dir);
+    Read_txt(path_dir, flag_rev_point);
     std::cout<<"1 ok"<<std::endl;
     if(flag_read_finish){
-        loop_time = nh.createTimer(ros::Duration(0.05), boost::bind(&Txt_pub::Pub_gps, this));
+        loop_time = nh.createTimer(ros::Duration(0.1), boost::bind(&Txt_pub::Pub_gps, this));
     }
 }
 //~Txt_pub(){
@@ -20,7 +22,7 @@ Txt_pub::Txt_pub(ros::NodeHandle &nh) {
 //    google::ShutdownGoogleLogging();
 //}
 
-bool Txt_pub::Read_txt(std::string pathdir) {
+bool Txt_pub::Read_txt(std::string pathdir, bool rev_point) {
     std::string file_path = pathdir;
     std::cout << pathdir <<std::endl;
     std::ifstream fin(file_path);
@@ -37,7 +39,19 @@ bool Txt_pub::Read_txt(std::string pathdir) {
             //std::cout << pt.x <<std::endl;
         }
     fin.close();
-    std::cout << "read " << point_raw.size() << " points from file.";
+    int point_num = point_raw.size();
+    std::cout << "read " << point_num << " points from file.";
+    std::stack<geometry_msgs::Point> temp_point;
+    if(flag_rev_point){
+        for(int i=0; i<point_num; i++){
+            temp_point.push(point_raw.front());
+            point_raw.pop();
+        }
+        for(int i=0; i<point_num; i++){
+            point_raw.push(temp_point.top());
+            temp_point.pop();
+        }
+    }
     flag_read_finish = true;
     return true;
 }

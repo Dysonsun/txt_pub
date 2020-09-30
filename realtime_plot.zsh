@@ -8,5 +8,5 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 echo ${DIR}
 
-source ./devel_isolated/setup.zsh
+source ./devel/setup.zsh
 python tools/realtime_plot.py

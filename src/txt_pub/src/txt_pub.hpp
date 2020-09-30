@@ -13,6 +13,7 @@
 #include <geometry_msgs/Vector3.h>
 #include <geometry_msgs/Point.h>
 #include <queue>
+#include <stack>
 
 #include "sensor_driver_msgs/GpswithHeading.h"
 
@@ -20,7 +21,7 @@ class Txt_pub {
 
 public:
     Txt_pub(ros::NodeHandle& nh);
-    bool Read_txt(std::string pathdir);
+    bool Read_txt(std::string pathdir, bool rev_point);
     void Linear_interpolation(std::queue<geometry_msgs::Point> &point);
     void Pub_gps();
 //    ~Txt_pub();
@@ -29,6 +30,7 @@ private:
     std::string path_dir;
     ros::Publisher pub;
     ros::Timer loop_time;
+    bool flag_rev_point;
     bool flag_read_finish;
     std::queue<geometry_msgs::Point> point_raw;
     std::queue<geometry_msgs::Point> point_cov;
