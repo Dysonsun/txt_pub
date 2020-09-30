@@ -1,0 +1,8 @@
+prefix=/home/sundong/bit_ivrc/other/txt_pub/src/txt_pub/cmake-build-debug/devel
+
+Name: txt_pub
+Description: Description of txt_pub
+Version: 0.0.1
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -1,0 +1,12 @@
+/home/sundong/workspace/sorftware/clion-2020.1.2/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/sundong/bit_ivrc/other/txt_pub/src/txt_pub
+CMake Error at cmake/functions.cmake:91 (message):
+  Compiling in Debug mode is not supported and can cause severely degraded
+  performance.  You should change the build type to Release.  If you want to
+  build in Debug mode anyway, call CMake with -DFORCE_DEBUG_BUILD=True
+Call Stack (most recent call first):
+  CMakeLists.txt:11 (google_initialize_txt_pub_project)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/sundong/bit_ivrc/other/txt_pub/src/txt_pub/cmake-build-debug/CMakeFiles/CMakeOutput.log".
+See also "/home/sundong/bit_ivrc/other/txt_pub/src/txt_pub/cmake-build-debug/CMakeFiles/CMakeError.log".
